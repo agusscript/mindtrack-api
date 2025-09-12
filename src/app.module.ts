@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { environmentConfig } from './config/environment.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { datasourceOptions } from './config/orm.config';
+import { UserModule } from './module/user/user.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { datasourceOptions } from './config/orm.config';
         autoLoadEntities: true,
       }),
     }),
+    UserModule,
   ],
   controllers: [],
   providers: [],
