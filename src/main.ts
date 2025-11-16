@@ -33,5 +33,14 @@ async function bootstrap() {
 
   const port: number = configService.get('server.port') as number;
   await app.listen(port);
+  console.info(`
+    ================================================
+    Welcome to MindTrack API
+    ================================================
+    Server is running on port ${port}
+    Environment: ${process.env.NODE_ENV}
+    Prefix: ${globalPrefix}
+    ================================================
+  `);
 }
 bootstrap();
