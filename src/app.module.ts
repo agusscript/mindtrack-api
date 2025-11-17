@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { datasourceOptions } from './config/orm.config';
 import { UserModule } from './module/user/user.module';
 import { AuthenticationModule } from './module/authentication/authentication.module';
+import { TaskModule } from './module/task/task.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AuthenticationModule } from './module/authentication/authentication.mod
     }),
     UserModule,
     AuthenticationModule,
+    TaskModule,
   ],
   controllers: [],
   providers: [],
