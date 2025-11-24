@@ -9,6 +9,7 @@ import { User } from 'src/module/user/entity/user.entity';
 import { jwtConstant } from '../constant/jwt.constant';
 import { SignOutDto } from '../dto/singOut.dto';
 import { RefreshTokenDto } from '../dto/refreshToken.dto';
+import { ISignUpResponse } from '../interface/sign-up-response.interface';
 
 @Injectable()
 export class AuthenticationService {
@@ -17,12 +18,26 @@ export class AuthenticationService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<User> {
+  async signUp(signUpDto: SignUpDto): Promise<ISignUpResponse> {
     const hashedPassword = await bcryptjs.hash(signUpDto.password, 10);
-    return await this.userService.create({
+    const user = await this.userService.create({
       ...signUpDto,
       password: hashedPassword,
     });
+
+    const { accessToken, refreshToken } = await this.generateTokens(user);
+
+    await this.saveRefreshToken(user.id, refreshToken);
+
+    return {
+      accessToken,
+      refreshToken,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+    };
   }
 
   async signIn(signInDto: SignInDto): Promise<ISignInResponse> {

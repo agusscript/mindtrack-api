@@ -3,16 +3,16 @@ import { AuthenticationService } from '../service/authentication.service';
 import { SignUpDto } from '../dto/signup.dto';
 import { SignInDto } from '../dto/signIn.dto';
 import { ISignInResponse } from '../interface/sign-in-response.interface';
-import { User } from 'src/module/user/entity/user.entity';
 import { SignOutDto } from '../dto/singOut.dto';
 import { RefreshTokenDto } from '../dto/refreshToken.dto';
+import { ISignUpResponse } from '../interface/sign-up-response.interface';
 
 @Controller('auth')
 export class AuthenticationController {
   constructor(private readonly authenticationService: AuthenticationService) {}
 
   @Post('sign-up')
-  async signUp(@Body() signUpDto: SignUpDto): Promise<User> {
+  async signUp(@Body() signUpDto: SignUpDto): Promise<ISignUpResponse> {
     return this.authenticationService.signUp(signUpDto);
   }
 
