@@ -1,5 +1,6 @@
 export interface ISignInResponse {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   user: {
     id: number;
     name: string;

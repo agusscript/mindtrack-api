@@ -4,6 +4,8 @@ import { SignUpDto } from '../dto/signup.dto';
 import { SignInDto } from '../dto/signIn.dto';
 import { ISignInResponse } from '../interface/sign-in-response.interface';
 import { User } from 'src/module/user/entity/user.entity';
+import { SignOutDto } from '../dto/singOut.dto';
+import { RefreshTokenDto } from '../dto/refreshToken.dto';
 
 @Controller('auth')
 export class AuthenticationController {
@@ -18,5 +20,19 @@ export class AuthenticationController {
   @HttpCode(HttpStatus.OK)
   async signIn(@Body() signInDto: SignInDto): Promise<ISignInResponse> {
     return this.authenticationService.signIn(signInDto);
+  }
+
+  @Post('refresh-token')
+  @HttpCode(HttpStatus.OK)
+  async refreshToken(
+    @Body() refreshTokenDto: RefreshTokenDto,
+  ): Promise<ISignInResponse> {
+    return this.authenticationService.refreshToken(refreshTokenDto);
+  }
+
+  @Post('sign-out')
+  @HttpCode(HttpStatus.OK)
+  async signOut(@Body() signOutDto: SignOutDto): Promise<void> {
+    return this.authenticationService.signOut(signOutDto);
   }
 }

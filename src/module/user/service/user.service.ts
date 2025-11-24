@@ -23,4 +23,13 @@ export class UserService {
     const mappedUser = this.userMapper.fromCreateDtoToEntity(createUserDto);
     return await this.userRepository.create(mappedUser);
   }
+
+  async updateRefreshToken(
+    userId: number,
+    refreshToken: string | null,
+  ): Promise<User> {
+    const user = await this.getOneById(userId);
+    user.refreshToken = refreshToken;
+    return await this.userRepository.update(userId, user);
+  }
 }

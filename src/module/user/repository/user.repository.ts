@@ -49,4 +49,17 @@ export class UserRepository {
 
     return await this.repository.save(user);
   }
+
+  async update(id: number, updates: Partial<User>): Promise<User> {
+    const userToUpdate = await this.repository.preload({
+      ...updates,
+      id,
+    });
+
+    if (!userToUpdate) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    return await this.repository.save(userToUpdate);
+  }
 }

@@ -16,6 +16,9 @@ export class User {
   @Column({ nullable: false })
   password: string;
 
+  @Column({ type: 'text', nullable: true })
+  refreshToken: string | null;
+
   @OneToMany(() => Task, (t) => t.user, {
     cascade: true,
   })
