@@ -6,6 +6,7 @@ import { datasourceOptions } from './config/orm.config';
 import { UserModule } from './module/user/user.module';
 import { AuthenticationModule } from './module/authentication/authentication.module';
 import { TaskModule } from './module/task/task.module';
+import { HabitModule } from './module/habit/habit.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TaskModule } from './module/task/task.module';
     UserModule,
     AuthenticationModule,
     TaskModule,
+    HabitModule,
   ],
   controllers: [],
   providers: [],

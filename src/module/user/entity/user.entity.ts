@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Task } from 'src/module/task/entity/task.entity';
+import { Habit } from 'src/module/habit/entity/habit.entity';
 
 @Entity({ name: 'user' })
 export class User {
@@ -19,4 +20,9 @@ export class User {
     cascade: true,
   })
   tasks: Task[];
+
+  @OneToMany(() => Habit, (h) => h.user, {
+    cascade: true,
+  })
+  habits: Habit[];
 }
